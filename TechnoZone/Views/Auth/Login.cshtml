@@ -1,0 +1,111 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Sign in";
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<div class="auth-page">
+    <div class="auth-panel">
+        <div class="auth-panel-inner">
+            <h1 class="auth-aside-headline">Built by hand.<br />Tuned for you.</h1>
+            <p class="auth-aside-body">
+                Sign in to track a build in progress, revisit a saved configuration,
+                or pick up a basket where you left it.
+            </p>
+            <ul class="auth-aside-list">
+                <li>Every order benchmarked before it ships</li>
+                <li>Three-year parts and labour cover</li>
+                <li>Direct line to the engineer who built your machine</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="auth-form-side">
+        <div class="auth-card">
+            <h2 class="auth-title">Sign in</h2>
+            <p class="auth-subtitle">Enter the details you registered with.</p>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="form-message form-message--success is-visible">@TempData["SuccessMessage"]</div>
+            }
+
+            <form id="loginForm"
+                  class="auth-form"
+                  method="post"
+                  action="@Url.Action("Login", "Auth", new { returnUrl })"
+                  data-ajax-url="@Url.Action("Login", "Auth", new { returnUrl })"
+                  novalidate>
+                @Html.AntiForgeryToken()
+
+                <div class="form-message @(ViewData.ModelState.IsValid ? "" : "form-message--error is-visible")" data-form-message>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        @Html.Raw(string.Join(" ", ViewData.ModelState.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage)))
+                    }
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="username">Username</label>
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           class="field-input"
+                           autocomplete="username"
+                           placeholder="e.g. testuser"
+                           value="@Model.Username" />
+                    <p class="field-error" data-error-for="username"></p>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="password">Password</label>
+                    <div class="field-with-button">
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="field-input"
+                               autocomplete="current-password"
+                               placeholder="Your password" />
+                        <button type="button"
+                                class="field-button"
+                                data-toggle-password="password"
+                                aria-pressed="false"
+                                aria-label="Show password">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="field-error" data-error-for="password"></p>
+                </div>
+
+                <div class="field-row">
+                    <label class="checkbox">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" value="true" />
+                        <span>Keep me signed in</span>
+                    </label>
+                    <a href="#" class="auth-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="auth-submit">Sign in</button>
+            </form>
+
+            <p class="auth-switch">
+                No account yet?
+                <a href="@Url.Action("Register", "Auth")" class="auth-link">Create one</a>
+            </p>
+
+            <div class="auth-demo">
+                <span>Demo account</span>
+                <code>testuser / Test@@123</code>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/validation.js" asp-append-version="true"></script>
+    <script src="~/js/auth.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,37 @@
+@model ProfileViewModel
+@{
+    ViewData["Title"] = "Your account";
+}
+
+<section class="profile-section">
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-avatar">@Model.Initials</div>
+            <div>
+                <h1 class="profile-name">@Model.FullName</h1>
+                <p class="profile-handle">@Model.Username</p>
+            </div>
+        </div>
+
+        <dl class="profile-details">
+            <div>
+                <dt>Username</dt>
+                <dd>@Model.Username</dd>
+            </div>
+            <div>
+                <dt>Email</dt>
+                <dd>@Model.Email</dd>
+            </div>
+            <div>
+                <dt>First name</dt>
+                <dd>@Model.FirstName</dd>
+            </div>
+            <div>
+                <dt>Last name</dt>
+                <dd>@Model.LastName</dd>
+            </div>
+        </dl>
+
+        <a href="@Url.Action("Logout", "Auth")" class="auth-submit auth-submit--inline">Sign out</a>
+    </div>
+</section>

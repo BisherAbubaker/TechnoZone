@@ -1,0 +1,290 @@
+@model HomeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ============ HERO SECTION ============ -->
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-content">
+            <p class="hero-eyebrow">Masterfully Engineered Computing</p>
+            <h1 class="hero-headline">PCs built with patience and precision</h1>
+            <p class="hero-body">
+                Every TechnoZone rig is built by hand, thoroughly benchmarked, and tuned for silent, relentless performance. No shortcuts. Just state-of-the-art silicon, perfectly optimized.
+            </p>
+            <div class="hero-ctas">
+                <a href="#" class="btn-primary">Configure Yours</a>
+                <a href="#" class="btn-secondary">Explore In-Stock</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-image-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust-strip">
+    <div class="trust-grid">
+        <div class="trust-item">
+            <div class="trust-icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+                </svg>
+            </div>
+            <div class="trust-text">
+                <h4>3-Year Custom Warranty</h4>
+                <p>No-hassle parts & labor coverage</p>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+            </div>
+            <div class="trust-text">
+                <h4>Tuned & Overclocked</h4>
+                <p>Professionally calibrated thermal profiles</p>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+            </div>
+            <div class="trust-text">
+                <h4>Crated Transit Protection</h4>
+                <p>Shipped in bespoke shockproof timber crates</p>
+            </div>
+        </div>
+        <div class="trust-item">
+            <div class="trust-icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                </svg>
+            </div>
+            <div class="trust-text">
+                <h4>Lifetime Support</h4>
+                <p>Talk directly to our engineers</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CATEGORIES SECTION ============ -->
+<section class="categories-section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <p class="section-eyebrow">Tailored Ecosystems</p>
+                <h2 class="section-headline">Architected for how you create and conquer</h2>
+            </div>
+            <p class="section-desc">
+                Choose a system template engineered specifically for heavy industrial workloads, esports superiority, or fluid modular development.
+            </p>
+        </div>
+        <div class="categories-grid">
+            @foreach (var cat in Model.Categories)
+            {
+                var imgClass = "cat-img-" + cat.Id;
+                <div class="category-card">
+                    <div class="category-image">
+                        <div class="category-image-placeholder @imgClass">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="category-content">
+                        <h3>@cat.Title</h3>
+                        <p>@cat.Description</p>
+                        <a href="#" class="category-cta">
+                            @cat.CtaText
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============ BESTSELLERS SECTION ============ -->
+<section class="bestsellers-section">
+    <div class="container">
+        <div class="bestsellers-header">
+            <div>
+                <p class="section-eyebrow">Bestselling Configs</p>
+                <h2 class="section-headline">Our most-demanded configurations, pre-tested</h2>
+            </div>
+            <a href="#" class="view-all-btn">View All Systems</a>
+        </div>
+        <div class="bestsellers-grid">
+            @for (int i = 0; i < Model.Bestsellers.Count; i++)
+            {
+                var product = Model.Bestsellers[i];
+                var prodClass = "prod-img-" + (i + 1);
+                <div class="product-card">
+                    <div class="product-image-wrap">
+                        <span class="product-badge">@product.Badge</span>
+                        <div class="product-image-placeholder @prodClass">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">@product.Name</h3>
+                        <ul class="product-specs">
+                            @foreach (var spec in product.Specs)
+                            {
+                                <li>@spec</li>
+                            }
+                        </ul>
+                        <div class="product-pricing">
+                            <div class="product-price">
+                                <span class="price-current">$@product.CurrentPrice.ToString("N0")</span>
+                                @if (product.OriginalPrice.HasValue)
+                                {
+                                    <span class="price-original">$@product.OriginalPrice.Value.ToString("N0")</span>
+                                }
+                            </div>
+                            <button type="button" class="btn-configure" data-add-to-cart="@product.Id">@product.CtaText</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============ TECHNICAL SPOT SECTION ============ -->
+<section class="tech-spot-section">
+    <div class="tech-spot-container">
+        <div class="tech-spot-image">
+            <div class="tech-spot-image-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="2" ry="2"/><rect x="6" y="6" width="12" height="12" rx="1" ry="1"/><line x1="9" y1="2" x2="9" y2="6"/><line x1="15" y1="2" x2="15" y2="6"/><line x1="9" y1="18" x2="9" y2="22"/><line x1="15" y1="18" x2="15" y2="22"/><line x1="2" y1="9" x2="6" y2="9"/><line x1="2" y1="15" x2="6" y2="15"/><line x1="18" y1="9" x2="22" y2="9"/><line x1="18" y1="15" x2="22" y2="15"/>
+                </svg>
+            </div>
+        </div>
+        <div class="tech-spot-content">
+            <p class="section-eyebrow">Zero Bottleneck Policy</p>
+            <h2 class="tech-spot-headline">Crafted down to the thermal compound</h2>
+            <p class="tech-spot-body">
+                We do not use cheap generic components. Every single capacitor, fan controller, thermal pad, and cable extension is selected from top-tier architectural manufacturers. Our builds undergo a rigorous 72-hour synthetic stress testing routine before they earn the certified TechnoZone stamp of approval.
+            </p>
+            <div class="tech-features-list">
+                @foreach (var feat in Model.TechFeatures)
+                {
+                    <div class="tech-feature-item">
+                        <svg class="tech-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <div>
+                            <h4>@feat.Title</h4>
+                            <p>@feat.Description</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PROMO BANNER ============ -->
+<section class="promo-banner">
+    <div class="promo-container">
+        <div class="promo-content">
+            <p class="section-eyebrow">Exclusive Release</p>
+            <h2 class="promo-headline">The Alpine Ash Wood Custom PC Edition</h2>
+            <p class="promo-body">
+                Integrating hand-finished sustainably-sourced Austrian Ash hardwood inserts into a deep matte obsidian case structure. Individually numbered, with custom internal copper loop routing. Limited to 100 total units globally.
+            </p>
+            <div class="promo-pricing">
+                <span class="promo-price-current">$5,499</span>
+                <span class="promo-price-original">$5,999</span>
+            </div>
+            <div class="promo-ctas">
+                <a href="#" class="btn-reserve">Reserve Unit</a>
+                <a href="#" class="btn-spec-sheet">View Spec Sheet</a>
+            </div>
+        </div>
+        <div class="promo-image">
+            <div class="promo-image-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/><line x1="9" y1="15" x2="9.01" y2="15"/><line x1="15" y1="15" x2="15.01" y2="15"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PARTNERS STRIP ============ -->
+<section class="partners-strip">
+    <p class="partners-label">Official Silicon & Assembly Partners</p>
+    <div class="partners-grid">
+        @foreach (var partner in Model.Partners)
+        {
+            <a href="#" class="partner-name">@partner.Name</a>
+        }
+    </div>
+</section>
+
+<!-- ============ TESTIMONIALS SECTION ============ -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <p class="section-eyebrow">In the Field</p>
+                <h2 class="section-headline">Loved by studios, developers, and speedrunners</h2>
+            </div>
+        </div>
+        <div class="testimonials-grid">
+            @foreach (var t in Model.Testimonials)
+            {
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        @for (int s = 0; s < t.StarRating; s++)
+                        {
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        }
+                    </div>
+                    <p class="testimonial-quote">"@t.Quote"</p>
+                    <p class="testimonial-author">@t.AuthorName</p>
+                    <p class="testimonial-title">@t.AuthorTitle</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============ NEWSLETTER SECTION ============ -->
+<section class="newsletter-section">
+    <div class="newsletter-container">
+        <div>
+            <h2 class="newsletter-headline">Join the TechnoZone Dispatch</h2>
+            <p class="newsletter-body">
+                Get detailed teardowns of custom rigs, optimization tips from our top assembly engineers, and early notifications on limited component drops.
+            </p>
+        </div>
+        <form class="newsletter-form"
+              method="post"
+              action="@Url.Action("Subscribe", "Home")"
+              data-ajax-url="@Url.Action("Subscribe", "Home")"
+              novalidate>
+            @Html.AntiForgeryToken()
+            <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" aria-label="Email address" />
+            <button type="submit" class="btn-subscribe">Subscribe</button>
+            <p class="newsletter-message" data-newsletter-message></p>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,160 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Create account";
+}
+
+<div class="auth-page">
+    <div class="auth-panel">
+        <div class="auth-panel-inner">
+            <h1 class="auth-aside-headline">Start your build.</h1>
+            <p class="auth-aside-body">
+                An account keeps your saved configurations, order history and warranty
+                records in one place.
+            </p>
+            <ul class="auth-aside-list">
+                <li>Save and compare configurations</li>
+                <li>Follow your build through assembly and testing</li>
+                <li>Keep every invoice and warranty in one place</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="auth-form-side">
+        <div class="auth-card auth-card--wide">
+            <h2 class="auth-title">Create your account</h2>
+            <p class="auth-subtitle">It takes about a minute.</p>
+
+            <form id="registerForm"
+                  class="auth-form"
+                  method="post"
+                  action="@Url.Action("Register", "Auth")"
+                  data-ajax-url="@Url.Action("Register", "Auth")"
+                  data-check-username-url="@Url.Action("CheckUsername", "Auth")"
+                  data-check-email-url="@Url.Action("CheckEmail", "Auth")"
+                  novalidate>
+                @Html.AntiForgeryToken()
+
+                <div class="form-message @(ViewData.ModelState.IsValid ? "" : "form-message--error is-visible")" data-form-message>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        @Html.Raw(string.Join(" ", ViewData.ModelState.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage)))
+                    }
+                </div>
+
+                <div class="field-pair">
+                    <div class="field">
+                        <label class="field-label" for="firstName">First name</label>
+                        <input type="text"
+                               id="firstName"
+                               name="firstName"
+                               class="field-input"
+                               autocomplete="given-name"
+                               value="@Model.FirstName" />
+                        <p class="field-error" data-error-for="firstName"></p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="lastName">Last name</label>
+                        <input type="text"
+                               id="lastName"
+                               name="lastName"
+                               class="field-input"
+                               autocomplete="family-name"
+                               value="@Model.LastName" />
+                        <p class="field-error" data-error-for="lastName"></p>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="username">Username</label>
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           class="field-input"
+                           autocomplete="username"
+                           placeholder="Letters, numbers, dots and underscores"
+                           value="@Model.Username" />
+                    <p class="field-error" data-error-for="username"></p>
+                    <p class="availability-hint" data-availability-for="username"></p>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="email">Email</label>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           class="field-input"
+                           autocomplete="email"
+                           placeholder="name@example.com"
+                           value="@Model.Email" />
+                    <p class="field-error" data-error-for="email"></p>
+                    <p class="availability-hint" data-availability-for="email"></p>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="password">Password</label>
+                    <div class="field-with-button">
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               class="field-input"
+                               autocomplete="new-password"
+                               placeholder="At least 6 characters, with a number" />
+                        <button type="button"
+                                class="field-button"
+                                data-toggle-password="password"
+                                aria-pressed="false"
+                                aria-label="Show password">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="strength" data-strength-meter data-score="0">
+                        <div class="strength-bar"><span></span></div>
+                        <span class="strength-label"></span>
+                    </div>
+
+                    <p class="field-error" data-error-for="password"></p>
+                </div>
+
+                <div class="field">
+                    <label class="field-label" for="confirmPassword">Confirm password</label>
+                    <div class="field-with-button">
+                        <input type="password"
+                               id="confirmPassword"
+                               name="confirmPassword"
+                               class="field-input"
+                               autocomplete="new-password"
+                               placeholder="Type it once more" />
+                        <button type="button"
+                                class="field-button"
+                                data-toggle-password="confirmPassword"
+                                aria-pressed="false"
+                                aria-label="Show password">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="field-error" data-error-for="confirmPassword"></p>
+                </div>
+
+                <button type="submit" class="auth-submit">Create account</button>
+            </form>
+
+            <p class="auth-switch">
+                Already registered?
+                <a href="@Url.Action("Login", "Auth")" class="auth-link">Sign in</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/validation.js" asp-append-version="true"></script>
+    <script src="~/js/auth.js" asp-append-version="true"></script>
+}
